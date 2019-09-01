@@ -50,12 +50,13 @@ QUnit.module('Тестируем функцию get', function () {
 
 	QUnit.test('get работает правильно c пустыми объектами ', function (assert) {
 		const object = {
+			name : null
 		};
 
 		assert.strictEqual(get(object, '.'), object);
 		assert.strictEqual(get(object, 'object'), undefined);
 		assert.strictEqual(get(object, '.0'), undefined);
-		assert.strictEqual(get(object, ''), object);
-		assert.strictEqual(get(object, '.Null'), undefined);
+		assert.strictEqual(get(object, '.name'), object.name);
+		assert.strictEqual(get(object, '.null'), undefined);
 	});
 });
