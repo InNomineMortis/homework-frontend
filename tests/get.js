@@ -13,7 +13,6 @@ QUnit.module('Тестируем функцию get', function () {
 
 		assert.strictEqual(get(object, '.foo'), object.foo);
 		assert.strictEqual(get(object, '.deep.hested.field'), object.deep.hested.field);
-
 		assert.deepEqual(get(object, '.deep.hested'), object.deep.hested);
 		assert.deepEqual(get(object, '.deep'), object.deep);
 		assert.deepEqual(get(object, '.'), object);
@@ -47,5 +46,16 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(object, '.baz.0'), undefined);
 		assert.strictEqual(get(object, '.baz.length'), undefined);
 		assert.strictEqual(get(object, '.0.1.2'), undefined);
+	});
+
+	QUnit.test('get работает правильно c пустыми объектами ', function (assert) {
+		const object = {
+		};
+
+		assert.strictEqual(get(object, '.'), object);
+		assert.strictEqual(get(object, 'object'), undefined);
+		assert.strictEqual(get(object, '.0'), undefined);
+		assert.strictEqual(get(object, ''), object);
+		assert.strictEqual(get(object, '.Null'), undefined);
 	});
 });
