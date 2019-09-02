@@ -50,7 +50,7 @@ QUnit.module('Тестируем функцию get', function () {
 
 	QUnit.test('get работает правильно c пустыми объектами ', function (assert) {
 		const object = {
-			name : null
+			name : null,
 		};
 
 		assert.strictEqual(get(object, '.'), object);
@@ -58,5 +58,25 @@ QUnit.module('Тестируем функцию get', function () {
 		assert.strictEqual(get(object, '.0'), undefined);
 		assert.strictEqual(get(object, '.name'), object.name);
 		assert.strictEqual(get(object, '.null'), undefined);
+	});
+	QUnit.test('get не работает если объект не объект', function (assert) {
+		const object = '.';
+		assert.strictEqual(get(object, '.'), undefined);
+		const object_1 = 12;
+		assert.strictEqual(get(object_1, 'object'), undefined);
+		const object_2 = null;
+		assert.strictEqual(get(object_2, '.null'), undefined);
+	});
+
+	QUnit.test('get не работает если поле не строка', function (assert) {
+		const object = {
+			foo: {
+				bar: 42
+			}
+		};
+		assert.strictEqual(get(object, 12), undefined);
+		assert.strictEqual(get(object, null), undefined);
+		assert.strictEqual(get(object, undefined), undefined);
+		assert.strictEqual(get(object, NaN), undefined);
 	});
 });

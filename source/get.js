@@ -1,6 +1,9 @@
 'use strict';
 
-const get = function (object, field) {
+const get = (object, field) => {
+    if (typeof object !== "object") return undefined;
+    if (object === null) return undefined;
+    if (typeof field !== "string") return undefined;
     field = field.slice(1);
     let fields = field.split('.');
     if (field === '') {
@@ -8,10 +11,10 @@ const get = function (object, field) {
     }
     if (fields[0] in object) {
         let newObject = object;
-        for (let key in fields) {
-            newObject = newObject[fields[key]];
-        }
+        fields.forEach(value => {
+            newObject = newObject[value];
+        });
         return newObject
     }
-    return object.field
+    return undefined
 };
