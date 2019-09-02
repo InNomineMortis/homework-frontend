@@ -1,7 +1,7 @@
 'use strict';
 
 const get = (object, field) => {
-    if ((typeof object !== "object") || (object === null)  || (typeof field !== "string")) {
+    if ((typeof object !== "object") || (object === null) || (typeof field !== "string")) {
         return void (0);
     }
     let fields = field.slice(1).split('.');
@@ -9,9 +9,7 @@ const get = (object, field) => {
         return object;
     }
     if (fields[0] in object) {
-        return fields.reduce((previousValue, currentValue) => {
-            return previousValue[currentValue];
-        }, object);
+        return fields.reduce((previousValue, currentValue) => previousValue[currentValue], object);
     }
     return void (0);
 };
