@@ -4,7 +4,7 @@ const get = (object, field) => {
     if ((typeof object !== "object") || (object === null) || (typeof field !== "string")) {
         return void (0);
     }
-    let fields = field.slice(1).split('.');
+    const fields = field.slice(1).split('.');
     if (field === '.') {
         return object;
     }
